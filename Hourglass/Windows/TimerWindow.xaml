@@ -25,6 +25,7 @@
         <KeyBinding Command="local:TimerWindow.StopCommand" Gesture="Ctrl+S"/>
         <KeyBinding Command="local:TimerWindow.EscapeCommand" Gesture="Esc"/>
         <KeyBinding Command="local:TimerWindow.FullScreenCommand" Gesture="Alt+Enter"/>
+        <KeyBinding Command="local:TimerWindow.FullScreenCommand" Gesture="F11"/>
         <KeyBinding Command="local:TimerWindow.MinimalScreenCommand" Gesture="F9"/>
     </Window.InputBindings>
     <Window.Resources>
