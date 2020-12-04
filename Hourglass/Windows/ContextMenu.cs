@@ -52,6 +52,11 @@ namespace Hourglass.Windows
         private MenuItem fullScreenMenuItem;
 
         /// <summary>
+        /// The "Minimal screen" <see cref="MenuItem"/>.
+        /// </summary>
+        private MenuItem minimalScreenMenuItem;
+
+        /// <summary>
         /// The "Prompt on exit" <see cref="MenuItem"/>.
         /// </summary>
         private MenuItem promptOnExitMenuItem;
@@ -365,6 +370,9 @@ namespace Hourglass.Windows
 
             // Full screen
             this.fullScreenMenuItem.IsChecked = this.timerWindow.IsFullScreen;
+            
+            // Minimal screen
+            this.minimalScreenMenuItem.IsChecked = this.timerWindow.IsMinimalScreen;
 
             // Prompt on exit
             this.promptOnExitMenuItem.IsChecked = this.timerWindow.Options.PromptOnExit;
@@ -476,6 +484,9 @@ namespace Hourglass.Windows
             // Full screen
             this.timerWindow.IsFullScreen = this.fullScreenMenuItem.IsChecked;
 
+            // Minimal screen
+            this.timerWindow.IsMinimalScreen = this.minimalScreenMenuItem.IsChecked;
+
             // Prompt on exit
             this.timerWindow.Options.PromptOnExit = this.promptOnExitMenuItem.IsChecked;
 
@@ -575,6 +586,13 @@ namespace Hourglass.Windows
             this.fullScreenMenuItem.IsCheckable = true;
             this.fullScreenMenuItem.Click += this.CheckableMenuItemClick;
             this.Items.Add(this.fullScreenMenuItem);
+
+            // Minimal screen
+            this.minimalScreenMenuItem = new MenuItem();
+            this.minimalScreenMenuItem.Header = Properties.Resources.ContextMenuMinimalScreenMenuItem;
+            this.minimalScreenMenuItem.IsCheckable = true;
+            this.minimalScreenMenuItem.Click += this.CheckableMenuItemClick;
+            this.Items.Add(this.minimalScreenMenuItem);
 
             // Prompt on exit
             this.promptOnExitMenuItem = new MenuItem();

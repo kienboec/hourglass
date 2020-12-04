@@ -99,6 +99,11 @@ namespace Hourglass.Windows
         /// </summary>
         public static readonly RoutedCommand FullScreenCommand = new RoutedCommand();
 
+        /// <summary>
+        /// Toggles full-screen mode.
+        /// </summary>
+        public static readonly RoutedCommand MinimalScreenCommand = new RoutedCommand();
+
         #endregion
 
         #region Private Members
@@ -175,9 +180,19 @@ namespace Hourglass.Windows
         private bool isFullScreen;
 
         /// <summary>
+        /// A value indicating whether the window is in minimal mode.
+        /// </summary>
+        private bool isMinimalScreen;
+
+        /// <summary>
         /// The <see cref="Window.WindowState"/> before the window was minimized.
         /// </summary>
         private WindowState restoreWindowState = WindowState.Normal;
+
+        /// <summary>
+        /// The <see cref="Window.Height"/> before the window was Minimal-ized.
+        /// </summary>
+        private double restoreHeight = 0;
 
         #endregion
 
@@ -366,6 +381,29 @@ namespace Hourglass.Windows
                 this.isFullScreen = value;
                 this.UpdateWindowStyle();
                 this.OnPropertyChanged("IsFullScreen");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the window is in minimal mode.
+        /// </summary>
+        public bool IsMinimalScreen
+        {
+            get
+            {
+                return this.isMinimalScreen;
+            }
+
+            set
+            {
+                if (this.isMinimalScreen == value)
+                {
+                    return;
+                }
+
+                this.isMinimalScreen = value;
+                this.UpdateWindowStyle();
+                this.OnPropertyChanged("IsMinimalScreen");
             }
         }
 
@@ -1400,6 +1438,19 @@ namespace Hourglass.Windows
                         WindowChrome.SetWindowChrome(this, null);
                     }
                 }
+            
+                if (this.isMinimalScreen && restoreHeight == 0)
+                {
+                    this.MinHeight = 0;
+                    this.restoreHeight = this.Height;
+                    this.Height = 0;
+                }
+                else if (!this.isMinimalScreen && restoreHeight != 0)
+                {
+                    this.Height = this.restoreHeight;
+                    this.MinHeight = 150;
+                    this.restoreHeight = 0;
+                }
             }
         }
 
@@ -1718,6 +1769,7 @@ namespace Hourglass.Windows
             if (!canceledOrReset && this.IsFullScreen)
             {
                 this.IsFullScreen = false;
+                this.IsMinimalScreen = false;
             }
         }
 
@@ -1729,6 +1781,16 @@ namespace Hourglass.Windows
         private void FullScreenCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             this.IsFullScreen = !this.IsFullScreen;
+        }
+
+        /// <summary>
+        /// Invoked when the <see cref="MinimalScreenCommand"/> is executed.
+        /// </summary>
+        /// <param name="sender">The <see cref="TimerWindow"/>.</param>
+        /// <param name="e">The event data.</param>
+        private void MinimalScreenCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.IsMinimalScreen = !this.IsMinimalScreen;
         }
 
         #endregion

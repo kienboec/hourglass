@@ -796,6 +796,10 @@ $</value>
     <value>Close when _expired</value>
     <comment>The text for the close when expired menu item, where the character following the optional underscore (_) is the access key</comment>
   </data>
+  <data name="ContextMenuMinimalScreenMenuItem" xml:space="preserve">
+    <value>_Minimal screen</value>
+    <comment>The text for the minimal screen menu item, where the character following the optional underscore (_) is the access key</comment>
+  </data>
   <data name="ContextMenuFullScreenMenuItem" xml:space="preserve">
     <value>_Full screen</value>
     <comment>The text for the full screen menu item, where the character following the optional underscore (_) is the access key</comment>
