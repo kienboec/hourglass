@@ -267,6 +267,15 @@ namespace Hourglass.Properties {
                 return ResourceManager.GetString("ContextMenuManageThemesMenuItem", resourceCulture);
             }
         }
+		
+		/// <summary>
+        ///   Looks up a localized string similar to _Minimal screen.
+        /// </summary>
+        internal static string ContextMenuMinimalScreenMenuItem {
+            get {
+                return ResourceManager.GetString("ContextMenuMinimalScreenMenuItem", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to _New timer.
